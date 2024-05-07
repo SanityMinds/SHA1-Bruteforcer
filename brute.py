@@ -29,8 +29,10 @@ def get_charset(mode):
 def brute_force_sha1(target_hash, min_length, max_length, mode):
     charset = get_charset(mode)
     for length in range(min_length, max_length + 1):
+        print(f"Trying length {length}")
         for guess in itertools.product(charset, repeat=length):
             guess_text = "".join(guess)
+            print(f"Trying: {guess_text}")  # Print every attempt
             if sha1(guess_text) == target_hash:
                 print("\033[92mSUCCESS: The original text is: {}\033[0m".format(guess_text))
                 return guess_text
@@ -49,7 +51,7 @@ Y8888P'    YP       YP    Y88888P Y88888P YP   YP Y8888P' `8888Y'
     print("Starting the script....")
     time.sleep(5)
     
-    target_hash = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8" # "password"
+    target_hash = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"
     mode = "Only Lowercase"
     min_length = 1
     max_length = 5
@@ -58,4 +60,4 @@ Y8888P'    YP       YP    Y88888P Y88888P YP   YP Y8888P' `8888Y'
     if not found_text:
         print("Not found within the given length and charset.")
 
-    input("\nPress Enter to exit...") 
+    input("\nPress Enter to exit...")
